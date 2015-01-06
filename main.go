@@ -44,7 +44,7 @@ func githubHook(event *webhooks.PushEvent, _ *webhooks.WebhookContext) {
 	refPath := strings.Split(event.Ref, "/")
 	ref := refPath[len(refPath)-1]
 	runScriptIfExists(fmt.Sprintf("%s", repo))
-	runScriptIfExists(fmt.Sprintf("%s:%s", repo, ref))
+	runScriptIfExists(fmt.Sprintf("%s~%s", repo, ref))
 }
 
 func runScriptIfExists(name string) {

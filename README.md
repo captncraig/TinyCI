@@ -13,14 +13,17 @@ Simply point your github webhook at `http://yourTinyCIserver/gh`.
 
 Will run scripts in this order (if they exist in scripts folder):
 
-1. `githubname.reponame.sh`
-2. `githubname.reponame~branch.sh`
+1. `gh-githubname.reponame.sh`
+2. `gh-githubname.reponame~branch.sh`
 
 For better security on webhooks you can set an environment variable called `github-hook-secret` with the same secret you supply to github when creating the webhook.
 	
 2. Docker hub webhooks:
 ----
 
+Point docker hub webhooks to `http://yourTinyCIserver/dh`
+
+Will run `dh-yourname.repo.sh` if it exists.
 
 3. Git polling:
 ----

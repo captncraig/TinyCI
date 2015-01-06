@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/captncraig/github-webhooks"
 	"net/http"
+	"strings"
 )
 
 func main() {
@@ -14,5 +15,8 @@ func main() {
 }
 
 func githubHook(event *webhooks.PushEvent, _ *webhooks.WebhookContext) {
-	fmt.Println(event.Repository.Name)
+	fmt.Println(event.Repository.FullName)
+	refPath := strings.Split(event.Ref, "/")
+	ref := refPath[len(refPath)-1]
+	fmt.Println(ref)
 }

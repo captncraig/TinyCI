@@ -33,6 +33,7 @@ func init() {
 	if runtime.GOOS == "windows" {
 		scriptExt = ".bat"
 	}
+	fmt.Println(scriptDir)
 }
 
 func main() {

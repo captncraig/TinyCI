@@ -59,5 +59,5 @@ func runScriptIfExists(name string) {
 	if err != nil {
 		log.Printf("Error executing %s: %s", filename, err.Error())
 	}
-	log.Println(output)
+	log.Println(string(output))
 }

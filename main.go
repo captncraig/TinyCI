@@ -50,10 +50,14 @@ func githubHook(event *webhooks.PushEvent, _ *webhooks.WebhookContext) {
 func runScriptIfExists(name string) {
 	filename := filepath.Join(scriptDir, name+scriptExt)
 	if _, err := os.Stat(filename); os.IsNotExist(err) {
-		fmt.Printf("Script does not exist: %s. Skipping.\n", filename)
+		log.Printf("Script does not exist: %s. Skipping.\n", filename)
 		return
 	}
 	cmd := exec.Command(filename)
+	log.Printf("Executing %s...\n", filename)
 	output, err := cmd.CombinedOutput()
-	fmt.Println(output, err)
+	if err != nil {
+		log.Printf("Error executing %s: %s", filename, err.Error())
+	}
+	log.Println(output)
 }

@@ -7,10 +7,12 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"runtime"
 	"strings"
 )
 
 var scriptDir string
+var scriptExt = ".sh"
 
 func init() {
 	scriptDir = os.Getenv("TINYCI-SCRIPT-DIR")
@@ -22,6 +24,9 @@ func init() {
 			log.Fatal(err)
 		}
 		scriptDir = filepath.Join(scriptDir, "scripts")
+	}
+	if runtime.GOOS == "windows" {
+		scriptExt = ".bat"
 	}
 }
 
@@ -37,8 +42,10 @@ func githubHook(event *webhooks.PushEvent, _ *webhooks.WebhookContext) {
 	repo := strings.Replace(event.Repository.FullName, "/", ".", -1)
 	refPath := strings.Split(event.Ref, "/")
 	ref := refPath[len(refPath)-1]
-	anyBranchScript := filepath.Join(scriptDir, fmt.Sprintf("%s.sh", repo))
-	fmt.Println(anyBranchScript)
-	singleBranchScript := filepath.Join(scriptDir, fmt.Sprintf("%s:%s.sh", repo, ref))
-	fmt.Println(singleBranchScript)
+	runScriptIfExists(fmt.Sprintf("%s", repo))
+	runScriptIfExists(fmt.Sprintf("%s:%s", repo, ref))
+}
+
+func runScriptIfExists(name string) {
+	fmt.Println(filepath.Join(scriptDir, name+scriptExt))
 }

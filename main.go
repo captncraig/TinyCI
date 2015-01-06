@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"path"
+	"path/filepath"
 	"strings"
 )
 
@@ -21,7 +21,7 @@ func init() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		scriptDir = path.Join(scriptDir, "scripts")
+		scriptDir = filepath.Join(scriptDir, "scripts")
 	}
 }
 
@@ -37,8 +37,8 @@ func githubHook(event *webhooks.PushEvent, _ *webhooks.WebhookContext) {
 	repo := strings.Replace(event.Repository.FullName, "/", ".", -1)
 	refPath := strings.Split(event.Ref, "/")
 	ref := refPath[len(refPath)-1]
-	anyBranchScript := path.Join(scriptDir, fmt.Sprintf("%s.sh", repo))
+	anyBranchScript := filepath.Join(scriptDir, fmt.Sprintf("%s.sh", repo))
 	fmt.Println(anyBranchScript)
-	singleBranchScript := path.Join(scriptDir, fmt.Sprintf("%s:%s.sh", repo, ref))
+	singleBranchScript := filepath.Join(scriptDir, fmt.Sprintf("%s:%s.sh", repo, ref))
 	fmt.Println(singleBranchScript)
 }

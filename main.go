@@ -36,11 +36,11 @@ func init() {
 }
 
 func main() {
-
 	gitHooks := webhooks.WebhookListener{}
 	gitHooks.OnPush = githubHook
 	http.HandleFunc("/gh", gitHooks.GetHttpListener())
 	http.HandleFunc("/dh", dockerHubHook)
+	go gitPoll()
 	http.ListenAndServe(":4567", nil)
 }
 
@@ -90,4 +90,8 @@ func runScriptIfExists(name string) {
 		log.Printf("Error executing %s: %s.", filename, err.Error())
 	}
 	log.Println(string(output))
+}
+
+func gitPoll() {
+
 }

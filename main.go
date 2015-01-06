@@ -15,8 +15,10 @@ func main() {
 }
 
 func githubHook(event *webhooks.PushEvent, _ *webhooks.WebhookContext) {
-	fmt.Println(event.Repository.FullName)
+	repo := strings.Replace(event.Repository.FullName, "/", ".", -1)
 	refPath := strings.Split(event.Ref, "/")
 	ref := refPath[len(refPath)-1]
-	fmt.Println(ref)
+	fmt.Printf("%s.sh\n", repo)
+	fmt.Printf("%s:%s.sh\n", repo, ref)
+
 }

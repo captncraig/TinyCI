@@ -25,5 +25,7 @@ Point docker hub webhooks to `http://yourTinyCIserver/dh`
 
 Will run `dh-yourname.repo.sh` if it exists.
 
-3. Git polling:
+
+Running in docker
 ----
+`docker run -d -P -v /var/run/docker.sock:/tmp/docker.sock -v $(which docker):/bin/docker -v /usr/lib/libdevmapper.so.1.02:/usr/lib/libdevmapper.so.1.02 --name=tiny captncraig/tinyci`

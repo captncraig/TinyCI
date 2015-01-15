@@ -1,7 +1,7 @@
 from golang:1.4
 
-ADD . /go/tinyci
-WORKDIR /go/tinyci
+ADD . /go/src/tinyci
+WORKDIR /go/src/tinyci
 
 RUN go get -v
 RUN go install

@@ -9,5 +9,7 @@ RUN go install
 EXPOSE 4567
 
 VOLUME /scripts
+ENV TINYCI-SCRIPT-DIR /scripts
 
+ENV DOCKER_HOST unix:///tmp/docker.sock
 ENTRYPOINT /go/bin/tinyci

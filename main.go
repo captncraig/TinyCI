@@ -17,9 +17,7 @@ var scriptDir string
 var scriptExt = ".sh"
 
 func init() {
-	scriptDir = os.Getenv("TINYCI-SCRIPT-DIR")
-
-	if scriptDir == "" {
+	if scriptDir = os.Getenv("TINYCI-SCRIPT-DIR"); scriptDir == "" {
 		var err error
 		scriptDir, err = os.Getwd()
 		if err != nil {
@@ -30,7 +28,7 @@ func init() {
 	if runtime.GOOS == "windows" {
 		scriptExt = ".bat"
 	}
-	fmt.Println(scriptDir)
+	fmt.Printf("Script directory: %s\n", scriptDir)
 }
 
 func main() {

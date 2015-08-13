@@ -18,14 +18,3 @@ Will run scripts in this order (if they exist in scripts folder):
 
 For better security on webhooks you can set an environment variable called `github-hook-secret` with the same secret you supply to github when creating the webhook.
 	
-2. Docker hub webhooks:
-----
-
-Point docker hub webhooks to `http://yourTinyCIserver/dh`
-
-Will run `dh-yourname.repo.sh` if it exists.
-
-
-Running in docker
-----
-`docker run -d -P -v /var/run/docker.sock:/tmp/docker.sock -v $(which docker):/bin/docker -v /usr/lib/libdevmapper.so.1.02:/usr/lib/libdevmapper.so.1.02 --name=tiny captncraig/tinyci`

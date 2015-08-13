@@ -59,7 +59,7 @@ func runScriptIfExists(name string) {
 	cmd := exec.Command(filename)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	err := cmd.CombinedOutput()
+	err := cmd.Run()
 	if err != nil {
 		log.Printf("Error executing %s: %s.", filename, err.Error())
 	}

@@ -55,7 +55,6 @@ func runScriptIfExists(name string) {
 		log.Printf("Script does not exist: %s. Skipping.\n", filename)
 		return
 	}
-
 	log.Printf("Executing %s...\n", filename)
 	cmd := exec.Command(filename)
 	cmd.Stdout = os.Stdout

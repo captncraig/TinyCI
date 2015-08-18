@@ -37,6 +37,7 @@ func main() {
 	flag.Parse()
 	gitHooks := webhooks.WebhookListener{}
 	gitHooks.OnPush = githubHook
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {})
 	http.HandleFunc("/gh", gitHooks.GetHttpListener())
 	http.ListenAndServe(*flagListen, nil)
 }

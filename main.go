@@ -29,16 +29,18 @@ func init() {
 	if runtime.GOOS == "windows" {
 		scriptExt = ".bat"
 	}
-	fmt.Printf("Script directory: %s\n", scriptDir)
+	log.Printf("Script directory: %s\n", scriptDir)
 }
 
 func main() {
+	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	flagListen := flag.String("l", ":4567", "interface an port to listen on.")
 	flag.Parse()
 	gitHooks := webhooks.WebhookListener{}
 	gitHooks.OnPush = githubHook
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {})
 	http.HandleFunc("/gh", gitHooks.GetHttpListener())
+	log.Printf("TinyCi listening on %s", *flagListen)
 	http.ListenAndServe(*flagListen, nil)
 }
 
